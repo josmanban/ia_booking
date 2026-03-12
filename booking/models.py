@@ -1,8 +1,8 @@
 from django.db import models
 
 class PropertyType(models.TextChoices):
-    APARTMENT = "dapartmento"
-    HOUSE = "casa"
+    APARTMENT = "apartment"
+    HOUSE = "house"
     PH = "PH"
 
 class City(models.TextChoices):
@@ -10,6 +10,10 @@ class City(models.TextChoices):
     LOS_ANGELES = "los_angeles"
     CHICAGO = "chicago"
     CORDOBA = "cordoba"
+
+class Operation(models.TextChoices):
+    BUY = "buy"
+    RENT = "rent"
 
 # Create your models here.
 class Property(models.Model):
@@ -19,7 +23,7 @@ class Property(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     city = models.CharField(max_length=100, choices=City.choices)
     address = models.CharField(max_length=255)
-
+    operation = models.CharField(max_length=100, choices=Operation.choices, default=Operation.RENT) 
     name = models.CharField(max_length=255, default="")
 
     def __str__(self):
